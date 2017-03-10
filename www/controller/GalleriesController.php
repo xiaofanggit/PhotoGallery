@@ -33,11 +33,9 @@ class GalleriesController extends Controller
         }
         if (file_exists('www/resources/user1-photos.json')) {
             $jsonString = file_get_contents('www/resources/user1-photos.json');
-            var_dump($jsonString);
             $photos = Helper::convertJsonStrToArray($jsonString);
 
             $galleryPhotos = Helper::getGalleryPhotos($photos);
-            var_dump($galleryPhotos);
         }
         require_once VIEW . 'list.galleries.html.php';
     }

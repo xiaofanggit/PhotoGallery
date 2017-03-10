@@ -126,7 +126,7 @@
                                               enctype="multipart/form-data">
                                             <input type="hidden" name="id"
                                                    value="<?= (empty($galleryPhotos)) ? 1 : ($photos[sizeof($galleryPhotos) - 1]->id + 1); ?>">
-                                            <input type="hidden" name="galleryId" value="<?= $gallery->id ?>">
+                                            <input type="hidden" name="galleryId" id="galleryId" value="<?= $gallery->id ?>">
                                             <input type="hidden" name="userId" value="<?= $gallery->userId ?>">
                                             <div class="form-group">
                                                 <label for="file">Select a file to upload</label>
@@ -184,6 +184,7 @@
     $(document).ready(function () {
         $(".upload-photo").click(function () {
             $('#galleryId').val(this.id);
+            alert($('#galleryId').val());
         });
         $(".edit-gallery").click(function () {
             $('#galleryId').val(this.id);
