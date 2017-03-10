@@ -20,12 +20,13 @@
             <?php
             if (!empty($galleries)):
                 foreach ($galleries as $gallery):
+                    echo 'ooooo:'.$gallery->id;
                     if (empty($gallery->id)) {
                         continue;
                     }
                     ?>
                     <tr>
-                        <td><?= !empty($gallery->galleryTitle) ? $gallery->galleryTitle : '' ?></td>
+                        <td id="title-<?=$gallery->id?>"><?= !empty($gallery->galleryTitle) ? $gallery->galleryTitle : '' ?></td>
                         <td>
                             <?php
                             if (!empty($galleryPhotos) && !empty($galleryPhotos[$gallery->id])):
@@ -65,14 +66,14 @@
                             <?php endif; ?>
                         </td>
 
-                        <td><?= !empty($gallery->galleryDescription) ? $gallery->galleryDescription : '' ?></td>
+                        <td id="description-<?=$gallery->id?>"><?= !empty($gallery->galleryDescription) ? $gallery->galleryDescription : '' ?></td>
                         <td>
-                            <button type="button" class="btn btn-primary edit-gallery" data-id="<?= $gallery->id ?>"
+                            <button type="button" class="btn btn-primary edit-gallery" id="<?= $gallery->id ?>" data-id="<?= $gallery->id ?>"
                                     data-toggle="modal" data-target="#editgalleryModal" style="margin-bottom:5px;"> Edit Gallery
-                            </button><br>
-                            <button type="button" class="btn btn-primary upload-photo" data-id="<?= $gallery->id ?>"
+                            </button>
+                            <button type="button" class="btn btn-primary upload-photo" id="<?= $gallery->id ?>" data-id="<?= $gallery->id ?>"
                                     data-toggle="modal" data-target="#uploadPhotoModal" style="margin-bottom:5px;"> Upload Photo
-                            </button><br>
+                            </button>
                             <a class="btn btn-danger" href="/Galleries/deleteGallery/<?= $gallery->id ?>">Remove
                                 Gallery</a>
                         </td>
@@ -88,17 +89,16 @@
                                     <h4 class="modal-title well">Edit a gallery</h4>
                                 </div>
                                 <div class="modal-body">
-                                    <form method="POST" action="editGallery/<?= $gallery->id ?>">
-                                        <input type="hidden" name="id" value="<?= $gallery->id ?>">
+                                    <form method="POST" action="editGallery">
+                                        <input type="hidden" name="id" id="galleryId" value="<?= $gallery->id ?>">
                                         <input type="hidden" name="userId" value="<?= $gallery->userId ?>">
 
                                         <div class="form-group">
-                                            gallery Title:*<input name="galleryTitle" class="form-control"
-                                                                  value="<?= $gallery->galleryTitle ?>" required>
+                                            gallery Title:*<input name="galleryTitle" id="galleryTitle" class="form-control" required>
                                         </div>
                                         <div class="form-group">
-                                            gallery Description:*<textarea name="galleryDescription"
-                                                                           class="form-control" required><?= $gallery->galleryDescription ?></textarea>
+                                            gallery Description:*<textarea name="galleryDescription" id="galleryDescription"
+                                                                           class="form-control" required></textarea>
                                         </div>
                                         <div class="modal-footer">
                                             <button type="submit" class="btn btn-primary">Submit</button>
@@ -127,7 +127,7 @@
                                                   enctype="multipart/form-data">
                                                 <input type="hidden" name="id"
                                                        value="<?= (empty($galleryPhotos)) ? 1 : ($photos[sizeof($galleryPhotos) - 1]->id + 1); ?>">
-                                                <input type="hidden" name="galleryId" value="<?= $gallery->id ?>">
+                                                <input type="hidden" name="galleryId" id="galleryId">
                                                 <input type="hidden" name="userId" value="<?= $gallery->userId ?>">
                                                 <div class="form-group">
                                                     <label for="file">Select a file to upload</label>
@@ -181,3 +181,16 @@
         </div>
     </div>
 <?php require_once VIEW . 'footer.html.php' ?>
+<script>
+    $(document).ready(function () {
+        $(".upload-photo").click(function () {
+            $('#galleryId').val(this.id);
+        });
+        $(".edit-gallery").click(function () {
+            $('#galleryId').val(this.id);
+            $('#galleryTitle').val( $('#title-'+this.id).text());
+            $('#galleryDescription').text( $('#description-'+this.id).text());
+        });
+
+    });
+</script>

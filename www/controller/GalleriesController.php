@@ -103,17 +103,17 @@ class GalleriesController extends Controller
      * edit an existed gallery
      * @param int $id gallery id
      */
-    public function editGallery($id)
+    public function editGallery()
     {
         if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-            $data['id'] = !empty($id[0]) ? $id[0] : '';
+            $data['id'] = $_REQUEST['id'];
             if (!empty($data['id'])) {
                 $data['userId'] = $_SESSION['userId'];
                 $data['galleryTitle'] = $_REQUEST['galleryTitle'];
                 $data['galleryDescription'] = $_REQUEST['galleryDescription'];
                 $jsonString = file_get_contents('www/resources/user'.$_SESSION['userId'].'-galleries.json');
                 $results = Helper::convertJsonStrToArray($jsonString);
-                $galleryKey = Helper::searchById($id[0], $results);
+                $galleryKey = Helper::searchById($data['id'], $results);
                 $results[$galleryKey] = $data;
                 $jsonData = json_encode($results);
                 file_put_contents('www/resources/user'.$_SESSION['userId'].'-galleries.json', $jsonData);
