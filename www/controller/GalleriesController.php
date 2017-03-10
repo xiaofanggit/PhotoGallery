@@ -149,7 +149,6 @@ class GalleriesController extends Controller
     public function deletePhoto($id)
     {
         $photoId = !empty($id[0]) ? $id[0] : '';
-        echo $photoId;
         if (!empty($photoId)) {
             Helper::deleteJsonData('www/resources/user'.$_SESSION['userId'].'-photos.json', 'id', $photoId);
         }

@@ -167,7 +167,7 @@ class Helper
         $jsonString = file_get_contents($fileName);
         $results = Helper::convertJsonStrToArray($jsonString);
         //Delete the json file if it is empty
-        if (empty($results) || empty($results[0])) {echo '1111';
+        if (empty($results) || empty($results[0])) {
             unlink($fileName);
             return;
         }

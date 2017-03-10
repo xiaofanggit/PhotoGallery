@@ -22,7 +22,7 @@
                     <td colspan="2">
                         <?php
                         if (!empty($galleryPhotos) && !empty($galleryPhotos[$gallery->id])):
-                            foreach ($galleryPhotos[$gallery->id] as $photo):var_dump($photo);
+                            foreach ($galleryPhotos[$gallery->id] as $photo):
                                 if (empty($photo->photoName)){
                                     continue;
                                 }
