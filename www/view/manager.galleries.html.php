@@ -126,7 +126,7 @@
                                             <form class="well" action="uploadPhoto" method="post"
                                                   enctype="multipart/form-data">
                                                 <input type="hidden" name="id"
-                                                       value="<?= (empty($photos)) ? 1 : ($photos[sizeof($photo) - 1]->id + 1); ?>">
+                                                       value="<?= (empty($galleryPhotos)) ? 1 : ($photos[sizeof($galleryPhotos) - 1]->id + 1); ?>">
                                                 <input type="hidden" name="galleryId" value="<?= $gallery->id ?>">
                                                 <input type="hidden" name="userId" value="<?= $gallery->userId ?>">
                                                 <div class="form-group">
