@@ -21,8 +21,12 @@
                     <td><?= $num ?></td>
                     <td colspan="2">
                         <?php
+                        echo 'ppppppp';
+                        var_dump($galleryPhotos);
                         if (!empty($galleryPhotos) && !empty($galleryPhotos[$gallery->id])):
-                            foreach ($galleryPhotos[$gallery->id] as $photo):
+                            echo '====';
+
+                            foreach ($galleryPhotos[$gallery->id] as $photo):var_dump($photo);
                                 if (empty($photo->photoName)){
                                     continue;
                                 }
