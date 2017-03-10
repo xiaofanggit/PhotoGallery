@@ -184,7 +184,6 @@
     $(document).ready(function () {
         $(".upload-photo").click(function () {
             $('#galleryId').val(this.id);
-            alert($('#galleryId').val());
         });
         $(".edit-gallery").click(function () {
             $('#galleryId').val(this.id);

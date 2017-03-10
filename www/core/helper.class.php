@@ -36,8 +36,9 @@ class Helper
      */
     public static function convertJsonStrToArray($jsonStr)
     {
+        $jsonStr = str_replace(array('},{', '}]{'), '}{', $jsonStr);
         $jsonStr = str_replace(array('[{', '}]', '[{}]'), '', $jsonStr);
-        $jsonStr = str_replace(array('},{'), '}{', $jsonStr);
+
         $jsonArr = explode('}{', $jsonStr);
 
         $results = array();
