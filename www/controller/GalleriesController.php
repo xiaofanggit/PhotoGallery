@@ -15,7 +15,7 @@ class GalleriesController extends Controller
     function __construct()
     {
         if ((!isset($_SESSION) || empty($_SESSION['userId'])) && $_SERVER['PHP_SELF'] !== '/Galleries/display') {
-            $this->redirect('Users/Login');
+            $this->redirect('/Users/Login');
 
         }
     }
